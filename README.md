@@ -4,6 +4,6 @@
 
 运行方法：
 
-`npm run webpack` -- 开启构建
+`npm run webpack` -- 执行构建
 
 `npm run sever` -- 开启本地服务器并执行热替换
