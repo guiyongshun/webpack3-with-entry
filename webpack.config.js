@@ -28,12 +28,7 @@ module.exports = {
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: [
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                importLoaders: 1
-                            }
-                        },
+                        'css-loader',
                         'postcss-loader',
                         'less-loader'
                     ]
@@ -45,12 +40,7 @@ module.exports = {
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: [
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                importLoaders: 1
-                            }
-                        },
+                        'css-loader',
                         'postcss-loader',
                         'less-loader'
                     ]
@@ -60,13 +50,14 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
+                    'style-loader',
                     {
-                        loader: 'style-loader',
+                        loader: 'css-loader',
                         options: {
-
+                            importLoaders: 1
                         }
                     },
-                    'css-loader'
+                    'postcss-loader',
                 ]
             }
         ]
@@ -77,19 +68,22 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname,'src/index.html'),
             filename: 'index.html',
-            chunks:['main']
+            chunks:['main'],
+            title: 'this is main.html'
         }),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname,'src/aa.html'),
+            template: path.resolve(__dirname,'src/index.html'),
             filename: 'aa.html',
             chunks: ['aa'],
-            inlineSource: '.css$'
+            inlineSource: '.css$',
+            title: 'this is aa.html'
         }),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname,'src/test.html'),
+            template: path.resolve(__dirname,'src/index.html'),
             filename: 'test.html',
             chunks: ['test'],
-            inlineSource: '.(js|css)$'
+            inlineSource: '.(js|css)$',
+            title: 'this is test.html'
         }),
         new HtmlWebpackInlineSourcePlugin(),
         new webpack.HotModuleReplacementPlugin()
